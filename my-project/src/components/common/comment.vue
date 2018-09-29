@@ -11,7 +11,7 @@
           <textarea style="width:90%;margin-left:5%;"  v-model="content"></textarea>
       </div>
 
-      <mt-button type="primary" class="send_btn">发表评论</mt-button>
+      <mt-button type="primary" class="send_btn" @click="sedcomment">发表评论</mt-button>
 
       <ul class="commet_content">
           <li>
@@ -19,10 +19,11 @@
               <span>10条评论</span>
           </li>
 
-          <li>
+          <li v-for='(item,index) in msg' :key="index">
               <div class="list">
-                  <span>匿名用户:</span>
-                  <span>12345667789</span>
+                  <span>{{item.user_name}}：</span>
+                  <span>{{item.content}}</span>
+                  <span>{{item.add_time |formNow}}</span>
               </div>
           </li>
 
@@ -41,6 +42,7 @@ export default {
   data () {
     return {
      content:'',
+     msg:[],
      page:1,
      disabled:false
     };
@@ -53,12 +55,44 @@ export default {
    this.getComment()
   },
   methods: {
+    // 获取评论列表
     getComment(){
         console.log("aaaaa")
         this.$axios.get(`getcomments/${this.cid}?pageindex=${this.page}`).then((res)=>{
-         console.log(res)
-         
+          if(res.data.message.length<10&&this.page!==1){
+            // 显示提示消息
+            this.$toast({
+              message:'没有数据了',
+              iconClass: 'icon icon-success',
+            })
+
+            this.disabled=true;
+            return;
+          }
+
+          if(this.page===1){
+            this.msg=res.data.message;
+          }else{
+             this.msg=this.msg.concat(res.data.message);
+          }
+          this.page++;
         })
+    },
+    // 发表评论
+    sedcomment(){
+      var content=this.content
+      this.$axios.post(`postcomment/${this.cid}`,`content=${this.content}`).then((res)=>{
+        console.log(res)
+        this.$toast({
+              message:res.data.message,
+              iconClass: 'icon icon-success',
+            })
+        // 页数归一
+        this.page=1;
+        // 清空input的内容
+        this.content='';
+        this.getComment();
+      })
     }
   }
 }

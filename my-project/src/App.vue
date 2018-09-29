@@ -1,8 +1,11 @@
 <template>
   <div id="app">
     <mt-header  title="信息管理系统"></mt-header>
-    <router-view />
-  
+    
+    <transition name="fade">
+     <router-view />
+    </transition>
+
     <mt-tabbar v-model="selected">
       <mt-tab-item id="Home">
        <div @click="change('Home')"> 
@@ -34,34 +37,42 @@
 
 
 <script>
-  export default {
-    name: "App",
-    data() {
-      return {
-        selected: ''
-      }
-    },
-    methods: {
-      change(val){
-       this.$router.push({
-        name:val,
+export default {
+  name: "App",
+  data() {
+    return {
+      selected: ""
+    };
+  },
+  methods: {
+    change(val) {
+      this.$router.push({
+        name: val
       });
-      }
     }
-  };
+  }
+};
 </script>
 
 <style>
-  .mint-tabbar{
-   position: fixed;
-   bottom:0;
-   left:0;
-  }
-  
-  .mint-tab-item-label img {
-    display: block;
-    width: 25px;
-    height: 25px;
-    margin: 0 auto;
-  }
+.mint-tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.mint-tab-item-label img {
+  display: block;
+  width: 25px;
+  height: 25px;
+  margin: 0 auto;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
 </style>

@@ -8,6 +8,8 @@ import Car from '@/components/Car/Car'
 import Serach from '@/components/Serach/Serach'
 import Photo from '@/components/Photo/Photo'
 import Photodetails from '@/components/Photo/Photodetails'
+import goodslist from '@/components/goods/goods'
+import goods_detail from "@/components/goods/goods_detail"
 
 Vue.use(Router)
 
@@ -27,6 +29,16 @@ export default new Router({
       path: '/news/details:id',
       name:'newsdetails',
       component:newsdetails 
+    },
+    {
+      path: '/goods/list',
+      name:'goodslist',
+      component:goodslist 
+    },
+    {
+      path: '/goods/detail',
+      name:'goodsdetail',
+      component:goods_detail 
     },
     {
       path: '/Vip',

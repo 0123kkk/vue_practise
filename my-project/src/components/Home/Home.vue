@@ -1,11 +1,6 @@
 <template>
   <div>
-    <mt-swipe :show-indicators="false">
-      <mt-swipe-item v-for="(item,index) in imgs" :key="index">
-        <img :src=item.img alt="">
-      </mt-swipe-item>
-    </mt-swipe>
-  
+    <my-swipe :imgs=imgs></my-swipe>
     <!-- 九宫格 -->
     <div>
       <my-ul>
@@ -44,7 +39,7 @@
             url: '../../../static/img/goodsShow.png',
             name: '商品展示',
             router: {
-              name: 'newslist'
+              name: 'goodslist'
             }
           },
           {
@@ -88,14 +83,7 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .mint-swipe {
-    width: 100%;
-    height: 200px;
-  }
-  
-  .mint-swipe img {
-    width: 100%;
-  }
+ 
   .link{
    text-decoration:none; 
    color:#333; 
