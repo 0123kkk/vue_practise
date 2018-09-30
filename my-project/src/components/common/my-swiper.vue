@@ -2,14 +2,14 @@
 <template>
   <mt-swipe :show-indicators="false">
       <mt-swipe-item v-for="(item,index) in imgs" :key="index">
-        <img :src=item.img alt="">
+        <img :src=item.img||item.src alt="">
       </mt-swipe-item>
   </mt-swipe>
 </template>
 
 <script>
 export default {
-  name:'my-swipe',
+  name:'my-swiper',
   props:['imgs'],  
   data () {
     return {
@@ -27,12 +27,5 @@ export default {
 
 </script>
 <style  scoped>
-   .mint-swipe {
-    width: 100%;
-    height: 200px;
-  }
-  
-  .mint-swipe img {
-    width: 100%;
-  }
+   
 </style>

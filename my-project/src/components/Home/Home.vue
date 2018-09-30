@@ -1,6 +1,6 @@
 <template>
   <div>
-    <my-swipe :imgs=imgs></my-swipe>
+    <my-swiper :imgs=imgs></my-swiper>
     <!-- 九宫格 -->
     <div>
       <my-ul>
@@ -93,4 +93,13 @@
    width:50px;
    height:50px;
  }
+
+ .mint-swipe {
+    width: 100%;
+    height: 200px;
+  }
+  
+  .mint-swipe img {
+    width: 100%;
+  }
 </style>
